@@ -1,4 +1,4 @@
-<h1>Current Discounts</h1>
+<h1>My Discounts</h1>
 <section>
   <% @discounts.by_percentage.each do |discount| %>
     <p class='discount-<%= discount.id %>'>
@@ -8,3 +8,4 @@
     </p>
   <% end %>
 </section>
+<%= button_to 'Add New Promotional Discount', '/merchant/discounts/new', method: :get %>

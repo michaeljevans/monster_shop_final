@@ -1,0 +1,10 @@
+<h2>New Discount Creation</h2>
+<%= form_for @discount, url: "/merchant/discounts?merchant_id=#{current_user.merchant_id}" do |f| %>
+  <%= f.label :percentage %>
+  <%= f.number_field :percentage %>
+
+  <%= f.label :items_required, 'Items Required' %>
+  <%= f.number_field :items_required %>
+
+  <%= f.submit %>
+<% end %>

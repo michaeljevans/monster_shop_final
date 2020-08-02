@@ -18,11 +18,12 @@ RSpec.describe 'Merchant discounts index' do
 
     fill_in 'Percentage', with: 5
     fill_in 'Items Required', with: 10
-    click_button 'Create New Discount'
+    click_button 'Create Discount'
 
     expect(current_path).to eq('/merchant/discounts')
 
-    expect(page).to have_content("Percentage: 5%")
+    expect(page).to have_content('Discount created!')
+    expect(page).to have_content('Percentage: 5%')
     expect(page).to have_content('Items Required: 10')
   end
 end

@@ -1,0 +1,10 @@
+<h1>Current Discounts</h1>
+<section>
+  <% @discounts.by_percentage.each do |discount| %>
+    <p class='discount-<%= discount.id %>'>
+      Discount # <%= link_to discount.id, "/merchant/discounts/#{discount.id}" %>
+      Percentage: <%= discount.percentage %>%
+      Items Required: <%= discount.items_required %>
+    </p>
+  <% end %>
+</section>

@@ -8,4 +8,8 @@ class Discount < ApplicationRecord
                             only_integer: true
 
   belongs_to :merchant
+
+  def self.by_percentage
+    order(percentage: :desc)
+  end
 end

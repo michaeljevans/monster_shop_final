@@ -6,9 +6,23 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+# Merchants
+meg   = Merchant.create!(name: "Meg's Market", address: '123 Main St', city: 'Denver', state: 'CO', zip: 12345)
+cory  = Merchant.create!(name: "Cory's Coffee", address: '456 North St', city: 'Denver', state: 'CO', zip: 12345)
+brian = Merchant.create!(name: "Brian's Bazaar", address: '789 South St', city: 'Denver', state: 'CO', zip: 12345)
 
-megan = Merchant.create!(name: 'Megans Marmalades', address: '123 Main St', city: 'Denver', state: 'CO', zip: 80218)
-brian = Merchant.create!(name: 'Brians Bagels', address: '125 Main St', city: 'Denver', state: 'CO', zip: 80218)
-megan.items.create!(name: 'Ogre', description: "I'm an Ogre!", price: 20, image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaLM_vbg2Rh-mZ-B4t-RSU9AmSfEEq_SN9xPP_qrA2I6Ftq_D9Qw', active: true, inventory: 5 )
-megan.items.create!(name: 'Giant', description: "I'm a Giant!", price: 50, image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaLM_vbg2Rh-mZ-B4t-RSU9AmSfEEq_SN9xPP_qrA2I6Ftq_D9Qw', active: true, inventory: 3 )
-brian.items.create!(name: 'Hippo', description: "I'm a Hippo!", price: 50, image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaLM_vbg2Rh-mZ-B4t-RSU9AmSfEEq_SN9xPP_qrA2I6Ftq_D9Qw', active: true, inventory: 3 )
+# Users
+admin       = User.create!(name: 'Admin', address: '123 Nunya Business Blvd', city: 'Denver', state: 'CO', zip: 12345, email: 'admin@me.com', password: 'supersecret', role: 2)
+meg_merch   = User.create!(name: 'Meg', address: "456 Don't Worry About It Dr", city: 'Denver', state: 'CO', zip: 12345, email: 'meg@me.com', password: 'market', role: 1, merchant_id: meg.id)
+brian_merch = User.create!(name: 'Brian', address: '789 Beeswax, Not Yours Blvd', city: 'Denver', state: 'CO', zip: 12345, email: 'brian@me.com', password: 'bazaar', role: 1, merchant_id: brian.id)
+
+# Meg's Items
+meh = Item.create!(name: 'Light Roast', description: 'Smooth', price: 15, inventory: 20, image: 'https://kitchentoolsmaster.com/wp-content/uploads/2020/02/light-roast-vs-dark-roast-coffee-1024x768.jpg', merchant_id: cory.id)
+
+# Cory's Items
+light_roast = Item.create!(name: 'Light Roast', description: 'Smooth', price: 15, inventory: 20, image: 'https://kitchentoolsmaster.com/wp-content/uploads/2020/02/light-roast-vs-dark-roast-coffee-1024x768.jpg', merchant_id: cory.id)
+dark_roast  = Item.create!(name: 'Dark Roast', description: 'Bold', price: 15, inventory: 20, image: 'https://www.holybeanscafe.com/holybeanscafe/wp-content/uploads/2015/11/dark-roast-coffee.jpg', merchant_id: cory.id)
+mug         = Item.create!(name: 'Coffee Mug', description: 'For Coffee', price: 10, inventory: 10, image: 'https://assets.katomcdn.com/q_auto,f_auto/products/634/634-5201/634-5201.jpg', merchant_id: cory.id)
+
+# Brian's Items
+blah = Item.create!(name: 'Light Roast', description: 'Smooth', price: 15, inventory: 20, image: 'https://kitchentoolsmaster.com/wp-content/uploads/2020/02/light-roast-vs-dark-roast-coffee-1024x768.jpg', merchant_id: cory.id)

@@ -13,11 +13,11 @@ brian = Merchant.create!(name: "Brian's Bazaar", address: '789 South St', city: 
 
 # Users
 admin       = User.create!(name: 'Admin', address: '123 Nunya Business Blvd', city: 'Denver', state: 'CO', zip: 12345, email: 'admin@me.com', password: 'supersecret', role: 2)
-meg_merch   = User.create!(name: 'Meg', address: "456 Don't Worry About It Dr", city: 'Denver', state: 'CO', zip: 12345, email: 'meg@me.com', password: 'market', role: 1, merchant_id: meg.id)
+cory_merch  = User.create!(name: 'Meg', address: "456 Don't Worry About It Dr", city: 'Denver', state: 'CO', zip: 12345, email: 'meg@me.com', password: 'market', role: 1, merchant_id: cory.id)
 brian_merch = User.create!(name: 'Brian', address: '789 Beeswax, Not Yours Blvd', city: 'Denver', state: 'CO', zip: 12345, email: 'brian@me.com', password: 'bazaar', role: 1, merchant_id: brian.id)
 
 # Meg's Items
-meh = Item.create!(name: 'Light Roast', description: 'Smooth', price: 15, inventory: 20, image: 'https://kitchentoolsmaster.com/wp-content/uploads/2020/02/light-roast-vs-dark-roast-coffee-1024x768.jpg', merchant_id: cory.id)
+meh = Item.create!(name: 'Light Roast', description: 'Smooth', price: 15, inventory: 20, image: 'https://kitchentoolsmaster.com/wp-content/uploads/2020/02/light-roast-vs-dark-roast-coffee-1024x768.jpg', merchant_id: meg.id)
 
 # Cory's Items
 light_roast = Item.create!(name: 'Light Roast', description: 'Smooth', price: 15, inventory: 20, image: 'https://kitchentoolsmaster.com/wp-content/uploads/2020/02/light-roast-vs-dark-roast-coffee-1024x768.jpg', merchant_id: cory.id)
@@ -25,4 +25,4 @@ dark_roast  = Item.create!(name: 'Dark Roast', description: 'Bold', price: 15, i
 mug         = Item.create!(name: 'Coffee Mug', description: 'For Coffee', price: 10, inventory: 10, image: 'https://assets.katomcdn.com/q_auto,f_auto/products/634/634-5201/634-5201.jpg', merchant_id: cory.id)
 
 # Brian's Items
-blah = Item.create!(name: 'Light Roast', description: 'Smooth', price: 15, inventory: 20, image: 'https://kitchentoolsmaster.com/wp-content/uploads/2020/02/light-roast-vs-dark-roast-coffee-1024x768.jpg', merchant_id: cory.id)
+blah = Item.create!(name: 'Light Roast', description: 'Smooth', price: 15, inventory: 20, image: 'https://kitchentoolsmaster.com/wp-content/uploads/2020/02/light-roast-vs-dark-roast-coffee-1024x768.jpg', merchant_id: brian.id)

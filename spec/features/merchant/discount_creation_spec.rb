@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Merchant discounts index' do
+RSpec.describe 'Merchant discount index' do
   it 'allows the merchant user to create new discounts' do
     cory  = Merchant.create!(name: "Cory's Coffee", address: '456 North St', city: 'Denver', state: 'CO', zip: 12345)
     cory_merch = User.create!(name: 'Cory', address: "456 Don't Worry About It Dr", city: 'Denver', state: 'CO', zip: 12345, email: 'cory@me.com', password: 'coffee', role: 1, merchant_id: cory.id)

@@ -12,7 +12,7 @@ RSpec.describe 'Merchant discount index' do
 
     click_on 'View Current Discounts'
 
-    click_button 'Add New Promotional Discount'
+    click_button 'Add New Discount'
 
     expect(current_path).to eq('/merchant/discounts/new')
 
@@ -38,7 +38,7 @@ RSpec.describe 'Merchant discount index' do
 
     click_on 'View Current Discounts'
 
-    click_button 'Add New Promotional Discount'
+    click_button 'Add New Discount'
 
     expect(current_path).to eq('/merchant/discounts/new')
 

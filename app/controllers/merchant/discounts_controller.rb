@@ -12,10 +12,13 @@ class Merchant::DiscountsController < Merchant::BaseController
   end
 
   def create
-    discount = Merchant.find(params[:merchant_id]).discounts.new(discount_params)
-    if discount.save
+    @discount = Merchant.find(params[:merchant_id]).discounts.new(discount_params)
+    if @discount.save
       flash[:success] = 'Discount created!'
       redirect_to '/merchant/discounts'
+    else
+      flash[:error] = 'All fields are required to create a new discount.'
+      render :new
     end
   end
 

@@ -21,6 +21,6 @@ RSpec.describe 'Merchant discount show page' do
 
     expect(page).to have_content("Discount # #{discount.id}")
     expect(page).to have_content("Percentage Discount: #{discount.percentage}%")
-    expect(page).to have_content("Items Required for Discount to Apply: #{discount.items_required}")
+    expect(page).to have_content("Items Required for Discount: #{discount.items_required}")
   end
 end

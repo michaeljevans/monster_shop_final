@@ -27,11 +27,14 @@ class Merchant::DiscountsController < Merchant::BaseController
   end
 
   def update
-    discount = Discount.find(params[:id])
-    discount.update(discount_params)
-    if discount.save
+    @discount = Discount.find(params[:id])
+    @discount.update(discount_params)
+    if @discount.save
       flash[:success] = 'Discount updated!'
-      redirect_to "/merchant/discounts/#{discount.id}"
+      redirect_to "/merchant/discounts/#{@discount.id}"
+    else
+      flash[:error] = 'All fields are required to update discount information.'
+      render :edit
     end
   end
 

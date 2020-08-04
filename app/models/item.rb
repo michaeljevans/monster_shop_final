@@ -31,7 +31,10 @@ class Item < ApplicationRecord
   end
 
   def quantity_required_for_discount
-    merchant.discounts.order(:items_required).first.items_required
+    merchant.discounts
+      .order(:items_required)
+      .first
+      .items_required
   end
 
   def find_best_discount(cart_item_count)

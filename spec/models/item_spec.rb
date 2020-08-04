@@ -28,14 +28,21 @@ RSpec.describe Item do
       @review_5 = @ogre.reviews.create(title: 'Okay', description: 'This Ogre is Okay', rating: 4)
     end
 
-    it '.sorted_reviews()' do
+    it '#sorted_reviews()' do
       expect(@ogre.sorted_reviews(3, :desc)).to eq([@review_1, @review_5, @review_2])
       expect(@ogre.sorted_reviews(3, :asc)).to eq([@review_3, @review_4, @review_2])
       expect(@ogre.sorted_reviews).to eq([@review_3, @review_4, @review_2, @review_5, @review_1])
     end
 
-    it '.average_rating' do
+    it '#average_rating' do
       expect(@ogre.average_rating.round(2)).to eq(3.00)
+    end
+
+    it '#quantity_required_for_discount' do
+      discount_1 = Discount.create!(percentage: 10, items_required: 20, merchant_id: @megan.id)
+      discount_2 = Discount.create!(percentage: 5, items_required: 10, merchant_id: @megan.id)
+
+      expect(@ogre.quantity_required_for_discount).to eq(10)
     end
   end
 

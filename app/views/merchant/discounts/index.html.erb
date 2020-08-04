@@ -2,10 +2,11 @@
 <section>
   <% @discounts.by_percentage.each do |discount| %>
     <section class='discount-<%= discount.id %>'>
-      Discount # <%= link_to discount.id, "/merchant/discounts/#{discount.id}" %><br>
+      <%= link_to "Discount #{discount.id}", "/merchant/discounts/#{discount.id}" %><br>
       Percentage: <%= discount.percentage %>%<br>
       Items Required: <%= discount.items_required %><br><br>
-      <%= button_to 'Edit Discount', "/merchant/discounts/#{discount.id}/edit", method: :get %>
+      <%= button_to 'Edit Discount', "/merchant/discounts/#{discount.id}/edit", method: :get %><br>
+      <%= button_to 'Delete Discount', "/merchant/discounts/#{discount.id}", method: :delete %><br>
     </section>
   <% end %>
 </section>

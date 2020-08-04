@@ -32,3 +32,8 @@
   background-color: #17BEBB;
   color: black;
 }
+
+img {
+  height: 200px;
+  width: auto;
+}

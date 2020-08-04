@@ -21,7 +21,7 @@ brian = Merchant.create!(name: "Brian's Bazaar", address: '789 South St', city: 
 
 # Users
 admin       = User.create!(name: 'Admin', address: '123 Nunya Business Blvd', city: 'Denver', state: 'CO', zip: 12345, email: 'admin@me.com', password: 'supersecret', role: 2)
-cory_merch  = User.create!(name: 'Meg', address: "456 Don't Worry About It Dr", city: 'Denver', state: 'CO', zip: 12345, email: 'cory@me.com', password: 'coffee', role: 1, merchant_id: cory.id)
+cory_merch  = User.create!(name: 'Cory', address: "456 Don't Worry About It Dr", city: 'Denver', state: 'CO', zip: 12345, email: 'cory@me.com', password: 'coffee', role: 1, merchant_id: cory.id)
 brian_merch = User.create!(name: 'Brian', address: '789 Beeswax, Not Yours Blvd', city: 'Denver', state: 'CO', zip: 12345, email: 'brian@me.com', password: 'bazaar', role: 1, merchant_id: brian.id)
 
 # Meg's Items

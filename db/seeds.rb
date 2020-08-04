@@ -11,8 +11,8 @@ Review.destroy_all
 Item.destroy_all
 Discount.destroy_all
 Order.destroy_all
-Merchant.destroy_all
 User.destroy_all
+Merchant.destroy_all
 
 # Merchants
 meg   = Merchant.create!(name: "Meg's Market", address: '123 Main St', city: 'Denver', state: 'CO', zip: 12345)
@@ -36,7 +36,7 @@ dark_roast  = Item.create!(name: 'Dark Roast', description: 'Bold & ', price: 15
 mug         = Item.create!(name: 'Coffee Mug', description: 'For Coffee', price: 10, inventory: 10, image: 'https://assets.katomcdn.com/q_auto,f_auto/products/634/634-5201/634-5201.jpg', merchant_id: cory.id)
 
 # Brian's Items
-tire  = Item.create!(name: "Road Tires", description: "They'll never pop!", price: 95, image: "https://www.rei.com/media/4e1f5b05-27ef-4267-bb9a-14e35935f218?size=784x588", inventory: 12)
-pump  = Item.create!(name: "Bike Pump", description: "Flat is bad!", price: 25, image: "https://images-na.ssl-images-amazon.com/images/I/615GENPCD5L._AC_SX425_.jpg", inventory: 15)
-chain = Item.create!(name: "Bike Chain", description: "Replacement chain!", price: 35, image: "https://images-na.ssl-images-amazon.com/images/I/51cafKW0NgL._AC_.jpg", inventory: 75)
-tool  = Item.create!(name: "Bike Tool", description: "All-In-One Tool", price: 20, image: "https://www.rei.com/media/product/718804", inventory: 20)
+tire  = Item.create!(name: "Road Tires", description: "They'll never pop!", price: 95, image: "https://www.rei.com/media/4e1f5b05-27ef-4267-bb9a-14e35935f218?size=784x588", inventory: 12, merchant_id: brian.id)
+pump  = Item.create!(name: "Bike Pump", description: "Flat is bad!", price: 25, image: "https://images-na.ssl-images-amazon.com/images/I/615GENPCD5L._AC_SX425_.jpg", inventory: 15, merchant_id: brian.id)
+chain = Item.create!(name: "Bike Chain", description: "Replacement chain!", price: 35, image: "https://images-na.ssl-images-amazon.com/images/I/51cafKW0NgL._AC_.jpg", inventory: 75, merchant_id: brian.id)
+tool  = Item.create!(name: "Bike Tool", description: "All-In-One Tool", price: 20, image: "https://www.rei.com/media/product/718804", inventory: 20, merchant_id: brian.id)

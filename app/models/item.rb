@@ -29,4 +29,8 @@ class Item < ApplicationRecord
   def average_rating
     reviews.average(:rating)
   end
+
+  def quantity_required_for_discount
+    merchant.discounts.order(:items_required).first.items_required
+  end
 end

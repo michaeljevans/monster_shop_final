@@ -46,12 +46,12 @@ RSpec.describe Item do
     end
 
     it '#find_best_discount' do
-      discount_1 = Discount.create!(percentage: 10, items_required: 15, merchant_id: @megan.id)
-      discount_2 = Discount.create!(percentage: 5, items_required: 10, merchant_id: @megan.id)
+      discount_1 = Discount.create!(percentage: 5, items_required: 10, merchant_id: @megan.id)
+      discount_2 = Discount.create!(percentage: 10, items_required: 15, merchant_id: @megan.id)
       discount_3 = Discount.create!(percentage: 15, items_required: 20, merchant_id: @megan.id)
       cart_item_count = 19
 
-      expect(@ogre.find_best_discount(cart_item_count)).to eq(discount_1)
+      expect(@ogre.find_best_discount(cart_item_count)).to eq(discount_2)
     end
   end
 

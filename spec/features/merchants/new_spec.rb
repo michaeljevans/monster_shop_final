@@ -5,7 +5,7 @@ RSpec.describe 'New Merchant Creation' do
     it 'I can link to a new merchant page from merchant index' do
       visit '/merchants'
 
-      click_link 'New Merchant'
+      click_button 'New Merchant'
 
       expect(current_path).to eq('/merchants/new')
     end

@@ -7,6 +7,8 @@
   <% @items.by_popularity(5, "ASC").each do |item| %>
     <li><%= item.name %>: <%= item.total_sold %> sold</li>
   <% end %>
+  <br>
+  <hr>
 </section>
 
 <% @items.each do |item| %>
@@ -26,5 +28,6 @@
       <%= link_to 'Update Item', "/merchant/items/#{item.id}/edit" %>
       <%= button_to 'Delete', "/merchant/items/#{item.id}", method: :delete if item.orders.empty? %>
     <% end %>
+    <hr>
   </section>
 <% end %>

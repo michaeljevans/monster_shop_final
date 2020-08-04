@@ -21,8 +21,8 @@ RSpec.describe 'Merchant discount index' do
     expect(current_path).to eq('/merchant/discounts')
 
     within ".discount-#{discount.id}" do
-      expect(page).to have_content("Discount # #{discount.id}")
-      expect(page).to have_link(discount.id)
+      expect(page).to have_content("Discount #{discount.id}")
+      expect(page).to have_link("Discount #{discount.id}")
       expect(page).to have_content("Percentage: #{discount.percentage}%")
       expect(page).to have_content("Items Required: #{discount.items_required}")
     end

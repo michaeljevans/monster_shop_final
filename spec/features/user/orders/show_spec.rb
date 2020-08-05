@@ -82,5 +82,44 @@ RSpec.describe 'Order Show Page' do
       expect(@giant.inventory).to eq(5)
       expect(@ogre.inventory).to eq(7)
     end
+
+    it 'I can see detailed order information including discounted prices on applicable items' do
+      ogre = @megan.items.create!(name: 'Ogre', description: "I'm an Ogre!", price: 20.25, image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaLM_vbg2Rh-mZ-B4t-RSU9AmSfEEq_SN9xPP_qrA2I6Ftq_D9Qw', active: true, inventory: 40 )
+      hippo = @brian.items.create!(name: 'Hippo', description: "I'm a Hippo!", price: 50, image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaLM_vbg2Rh-mZ-B4t-RSU9AmSfEEq_SN9xPP_qrA2I6Ftq_D9Qw', active: true, inventory: 30 )
+      Discount.create!(percentage: 10, items_required: 4, merchant_id: @megan.id)
+      Discount.create!(percentage: 15, items_required: 10, merchant_id: @brian.id)
+
+      4.times do
+        visit item_path(ogre.id)
+        click_button 'Add to Cart'
+      end
+
+      10.times do
+        visit item_path(hippo.id)
+        click_button 'Add to Cart'
+      end
+
+      visit '/cart'
+
+      click_button 'Check Out'
+
+      order = Order.last
+
+      visit "/profile/orders/#{order.id}"
+
+      expect(page).to have_content('Total: $497.90')
+
+      within "#order-item-#{OrderItem.find_by(item_id: ogre.id).id}" do
+        expect(page).to have_content('Price: $20.25 $18.23')
+        expect(page).to have_content('10% Discount Applied!')
+        expect(page).to have_content('Subtotal: $72.90')
+      end
+
+      within "#order-item-#{OrderItem.find_by(item_id: hippo.id).id}" do
+        expect(page).to have_content('Price: $50.00 $42.50')
+        expect(page).to have_content('15% Discount Applied!')
+        expect(page).to have_content('Subtotal: $425.00')
+      end
+    end
   end
 end

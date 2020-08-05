@@ -11,7 +11,7 @@
       <p>Quantity: <%= cart.count_of(item.id) %></p>
       <% if cart.count_of(item.id) >= item.quantity_required_for_discount %>
         <p>Subtotal: <del><%= number_to_currency(cart.subtotal_for(item.id)) %></del> <%= number_to_currency(cart.discounted_subtotal_for(item.id)) %></p>
-        <p>Discount Applied!</p>
+        <p><%= item.find_best_discount(cart.contents[item.id.to_s]) %>% Discount Applied!</p>
       <% else %>
         <p>Subtotal: <%= number_to_currency(cart.subtotal_for(item.id)) %></p>
       <% end %>

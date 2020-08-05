@@ -168,5 +168,50 @@ RSpec.describe 'Cart Show Page' do
         expect(page).to have_content("Cart: 0")
       end
     end
+
+    it 'I can see reduced item prices and grand total when a discount has been applied' do
+      meg = Merchant.create!(name: 'Megans Marmalades', address: '123 Main St', city: 'Denver', state: 'CO', zip: 80218)
+      meg.discounts.create!(percentage: 5, items_required: 20)
+      meg.discounts.create!(percentage: 10, items_required: 10)
+      ogre = meg.items.create!(name: 'Ogre', description: "I'm an Ogre!", price: 20, image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaLM_vbg2Rh-mZ-B4t-RSU9AmSfEEq_SN9xPP_qrA2I6Ftq_D9Qw', active: true, inventory: 50)
+      giant = meg.items.create!(name: 'Giant', description: "I'm a Giant!", price: 50, image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaLM_vbg2Rh-mZ-B4t-RSU9AmSfEEq_SN9xPP_qrA2I6Ftq_D9Qw', active: true, inventory: 25)
+
+      visit "/items/#{ogre.id}"
+
+      click_button 'Add to Cart'
+
+      visit "/items/#{giant.id}"
+
+      click_button 'Add to Cart'
+
+      visit '/cart'
+
+      expect(page).to have_content('Total: $70.00')
+
+      within "#item-#{ogre.id}" do
+        expect(page).to have_content('Subtotal: $20.00')
+      end
+
+      within "#item-#{giant.id}" do
+        expect(page).to have_content('Subtotal: $50.00')
+      end
+
+      20.times do
+        within "#item-#{ogre.id}" do
+          click_button 'More of This!'
+        end
+      end
+
+      expect(page).to have_content('Total: $428.00')
+
+      within "#item-#{ogre.id}" do
+        expect(page).to have_content('Subtotal: $420.00 $378.00')
+        expect(page).to have_content('Discount Applied!')
+      end
+
+      within "#item-#{giant.id}" do
+        expect(page).to have_content('Subtotal: $50.00')
+      end
+    end
   end
 end

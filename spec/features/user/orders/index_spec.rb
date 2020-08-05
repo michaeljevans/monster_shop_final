@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'User Order Show Page' do
+RSpec.describe 'User Order Index Page' do
   describe 'As a Registered User' do
     before :each do
       @megan = Merchant.create!(name: 'Megans Marmalades', address: '123 Main St', city: 'Denver', state: 'CO', zip: 80218)
@@ -48,20 +48,40 @@ RSpec.describe 'User Order Show Page' do
       end
     end
 
-    it 'Order information includes item discounts when appropriate' do
+    it 'Order total includes item discounts when appropriate' do
       Discount.create!(percentage: 5, items_required: 2, merchant_id: @megan.id)
       Discount.create!(percentage: 10, items_required: 2, merchant_id: @megan.id)
       Discount.create!(percentage: 15, items_required: 2, merchant_id: @brian.id)
 
+      visit item_path(@ogre)
+      click_button 'Add to Cart'
+      visit item_path(@ogre)
+      click_button 'Add to Cart'
+
+      visit '/cart'
+
+      click_button 'Check Out'
+
       visit '/profile/orders'
 
-      within "#order-#{@order_1.id}" do
-        expect(page).to have_content("Total: $36.45")
-      end
+      expect(page).to have_content("Total: $36.45")
 
-      within "#order-#{@order_2.id}" do
-        expect(page).to have_content("Total: $175.00")
-      end
+      visit item_path(@giant)
+      click_button 'Add to Cart'
+      visit item_path(@giant)
+      click_button 'Add to Cart'
+      visit item_path(@hippo)
+      click_button 'Add to Cart'
+      visit item_path(@hippo)
+      click_button 'Add to Cart'
+
+      visit '/cart'
+
+      click_button 'Check Out'
+
+      visit '/profile/orders'
+
+      expect(page).to have_content("Total: $175.00")
     end
   end
 end

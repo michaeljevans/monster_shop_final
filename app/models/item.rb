@@ -35,10 +35,16 @@ class Item < ApplicationRecord
     Float::INFINITY
   end
 
-  def find_best_discount(item_count)
-    merchant.discounts
-      .order('discounts.percentage * discounts.items_required DESC')
-      .where('discounts.items_required <= ?', item_count)
-      .first
+  def find_best_discount(cart_amount)
+    discount_savings = {}
+    eligible_discounts(cart_amount).each do |discount|
+      discount_savings[discount.id] = cart_amount * self.price * (1 - discount.percentage.to_f / 100)
+    end
+    discount_id = discount_savings.min_by { |_, value| value }.first
+    Discount.find(discount_id)
+  end
+
+  def eligible_discounts(item_count)
+    merchant.discounts.where('discounts.items_required <= ?', item_count)
   end
 end

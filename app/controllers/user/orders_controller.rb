@@ -13,11 +13,8 @@ class User::OrdersController < ApplicationController
     order = current_user.orders.new
     order.save
       cart.items.each do |item|
-        order.order_items.create({
-          item: item,
-          quantity: cart.count_of(item.id),
-          price: item.price
-          })
+        item_subtotal = cart.discounted_subtotal_for(item.id) || cart.subtotal_for(item.id)
+        order.order_items.create({item: item, quantity: cart.count_of(item.id), price: item_subtotal / cart.count_of(item.id)})
       end
     session.delete(:cart)
     flash[:notice] = "Order created successfully!"

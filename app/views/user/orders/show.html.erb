@@ -12,7 +12,12 @@
     <h3><%= link_to order_item.item.name, item_path(order_item.item) %></h3>
     <p><%= order_item.item.description %></p>
     <p>Quantity: <%= order_item.quantity %></p>
-    <p>Price: <%= number_to_currency(order_item.price) %></p>
+    <% if order_item.price != order_item.item.price %>
+      <p>Price: <del><%= number_to_currency(order_item.item.price) %></del> <%= number_to_currency(order_item.price) %></p>
+      <p><%= ((1 - order_item.price / order_item.item.price) * 100).round %>% Discount Applied!
+    <% else %>
+      <p>Price: <%= number_to_currency(order_item.price) %></p>
+    <% end %>
     <p>Subtotal: <%= number_to_currency(order_item.subtotal) %></p>
   </section>
 <% end %>

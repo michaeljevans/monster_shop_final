@@ -45,7 +45,7 @@ RSpec.describe Item do
       expect(@ogre.quantity_required_for_discount).to eq(10)
     end
 
-    it '#best_discount' do
+    it '#find_best_discount' do
       discount_1 = Discount.create!(percentage: 5, items_required: 50, merchant_id: @megan.id)
       discount_2 = Discount.create!(percentage: 10, items_required: 5, merchant_id: @megan.id)
       discount_3 = Discount.create!(percentage: 15, items_required: 10, merchant_id: @megan.id)

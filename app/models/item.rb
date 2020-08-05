@@ -36,15 +36,6 @@ class Item < ApplicationRecord
   end
 
   def find_best_discount(cart_amount)
-    discount_savings = {}
-    eligible_discounts(cart_amount).each do |discount|
-      discount_savings[discount.id] = cart_amount * self.price * (1 - discount.percentage.to_f / 100)
-    end
-    discount_id = discount_savings.min_by { |_, value| value }.first
-    Discount.find(discount_id)
-  end
-
-  def eligible_discounts(item_count)
-    merchant.discounts.where('discounts.items_required <= ?', item_count)
+    merchant.discounts.where('discounts.items_required <= ?', cart_amount).order('discounts.percentage DESC').first
   end
 end
